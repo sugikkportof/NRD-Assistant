@@ -1,80 +1,69 @@
-/* GLOBAL SETTINGS */
+/* RESET & GLOBAL */
 body, html {
     margin: 0;
     padding: 0;
-    height: 100%;
-    font-family: 'Sego UI', Inter, sans-serif;
-    background-color: #343541; /* ChatGPT main bg */
-    overflow: hidden;
-}
-
-.chatgpt-container {
-    display: flex; /* Bikin kolom kiri-kanan */
     height: 100vh;
+    font-family: 'Segoe UI', Inter, sans-serif;
+    background-color: #343541; /* Warna gelap khas ChatGPT */
+    overflow: hidden; /* Cegah halaman luar ikut ke-scroll */
 }
 
-/* 1. SIDEBAR (KIRI) */
+/* CONTAINER UTAMA */
+.chatgpt-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* SIDEBAR KIRI */
 .sidebar {
     width: 260px;
-    background-color: #202123; /* ChatGPT sidebar bg */
+    background-color: #202123;
     color: #ececf1;
     display: flex;
     flex-direction: column;
-    padding: 15px;
-}
-
-.ndr-logo {
-    width: 40px; height: 40px; background: #6366f1; border-radius: 8px;
-    display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .logo-area { display: flex; align-items: center; margin-bottom: 30px; }
+.ndr-logo {
+    width: 35px; height: 35px; background: #0284c7; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px;
+}
 .logo-area h2 { font-size: 1.1rem; margin: 0; }
 
+/* STYLE TOMBOL SIDEBAR */
 .menu-items button {
-    background: transparent; border: none; color: #ececf1;
-    text-align: left; padding: 10px 15px; width: 100%; border-radius: 5px;
-    cursor: pointer; margin-bottom: 5px; transition: 0.2s;
+    background: transparent; border: 1px solid rgba(255,255,255,0.1); 
+    color: #ececf1; text-align: left; padding: 12px 15px; width: 100%; 
+    border-radius: 8px; cursor: pointer; margin-bottom: 8px; transition: 0.2s;
 }
+.menu-items button:hover { background-color: rgba(255,255,255,0.1); border-color: #0284c7; }
 
-.menu-items button.active, .menu-items button:hover {
-    background-color: rgba(255,255,255,0.1);
-}
+.user-area { margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; font-size: 0.85rem; color: #8e8ea0; }
 
-.user-area { margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
-
-/* 2. MAIN CHAT AREA (TENGAH) */
+/* AREA TENGAH (CHAT) */
 .main-chat {
-    flex: 1; /* Ambil sisa ruang */
+    flex: 1;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
-    position: relative;
-    justify-content: center; align-items: center;
+    justify-content: center; /* Posisikan chat di tengah */
+    align-items: center;
+    background-color: #343541;
 }
 
-/* Welcome Section */
-.welcome-section {
-    text-align: center; color: #ececf1; position: absolute; top: 30%;
-    display: flex; flex-direction: column; align-items: center;
-}
-
-.central-ndr-logo {
-    width: 60px; height: 60px; background: #6366f1; border-radius: 12px;
-    display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; margin-bottom: 20px;
-}
-
-/* THE BOTPRESS CONTAINER */
+/* WADAH BOTPRESS (SOLUSI SCROLL) */
 #bp-webchat-container {
     width: 100%;
-    max-width: 800px; /* Bikin chatnya di tengah kaya ChatGPT */
-    height: 100%;
+    max-width: 800px; /* Lebar nyaman buat dibaca */
+    height: 100vh; /* PENTING: Maksa bot ambil full tinggi layar */
     background-color: transparent !important;
-    position: relative;
-    z-content: 10;
 }
 
-/* Hide Botpress Header & Welcome Screen bawaan biar kita pake buatan kita sendiri */
-#bp-webchat-container iframe .bpw-header-container,
-#bp-webchat-container iframe .bpw-welcome-screen {
-    display: none !important;
+/* PASTIKAN IFRAME DALEMNYA FULL */
+#bp-webchat-container iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: none !important;
 }
