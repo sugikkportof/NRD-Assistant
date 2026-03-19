@@ -1,29 +1,41 @@
-/* RESET & GLOBAL */
-body, html {
+/* =========================================
+   NDR ASSISTANT - FINAL PREMIUM CSS 
+   (Solusi Anti-Kepotong & Full Scroll)
+   ========================================= */
+
+/* 1. RESET GLOBAL (Kunci Layar Biar Gak Goyang) */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    width: 100vw;
+    height: 100vh !important; /* Paksa mentok seukuran layar */
+    overflow: hidden !important; /* Kunci mati scroll web luar */
+    background-color: #343541; 
     font-family: 'Segoe UI', Inter, sans-serif;
-    background-color: #343541; /* Warna gelap khas ChatGPT */
-    overflow: hidden; /* Cegah halaman luar ikut ke-scroll */
 }
 
-/* CONTAINER UTAMA */
+/* 2. LAYOUT UTAMA (Kiri-Kanan) */
 .chatgpt-container {
     display: flex;
-    height: 100vh;
     width: 100vw;
+    height: 100vh;
 }
 
-/* SIDEBAR KIRI */
+/* 3. SIDEBAR KIRI */
 .sidebar {
     width: 260px;
+    height: 100vh; /* Tinggi pas layar */
     background-color: #202123;
     color: #ececf1;
     display: flex;
     flex-direction: column;
     padding: 20px;
-    box-sizing: border-box;
+    overflow-y: auto; /* Kalau tombol lu nambah banyak, sidebarnya bisa di-scroll */
+    border-right: 1px solid rgba(255,255,255,0.05);
 }
 
 .logo-area { display: flex; align-items: center; margin-bottom: 30px; }
@@ -33,37 +45,47 @@ body, html {
 }
 .logo-area h2 { font-size: 1.1rem; margin: 0; }
 
-/* STYLE TOMBOL SIDEBAR */
+.menu-items p { color: #8e8ea0; font-size: 0.75rem; padding-bottom: 10px; font-weight: bold; margin: 0;}
+
+/* Style Tombol Interaktif */
 .menu-items button {
     background: transparent; border: 1px solid rgba(255,255,255,0.1); 
     color: #ececf1; text-align: left; padding: 12px 15px; width: 100%; 
     border-radius: 8px; cursor: pointer; margin-bottom: 8px; transition: 0.2s;
+    font-size: 0.9rem;
 }
 .menu-items button:hover { background-color: rgba(255,255,255,0.1); border-color: #0284c7; }
 
 .user-area { margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; font-size: 0.85rem; color: #8e8ea0; }
 
-/* AREA TENGAH (CHAT) */
+/* =========================================
+   4. AREA CHAT TENGAH (ZONA OPERASI SCROLL)
+   ========================================= */
 .main-chat {
-    flex: 1;
-    height: 100vh;
-    display: flex;
-    justify-content: center; /* Posisikan chat di tengah */
-    align-items: center;
+    flex: 1; /* Ambil sisa lebar layar */
+    height: 100vh; /* Kunci tinggi seukuran layar */
+    position: relative; /* KUNCI UTAMA buat nahan botpress */
     background-color: #343541;
 }
 
-/* WADAH BOTPRESS (SOLUSI SCROLL) */
+/* KANDANG BOTPRESS (MENGGUNAKAN ABSOLUTE POSITION) */
 #bp-webchat-container {
+    position: absolute; /* Lepas dari aturan normal flexbox */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
-    max-width: 800px; /* Lebar nyaman buat dibaca */
-    height: 100vh; /* PENTING: Maksa bot ambil full tinggi layar */
+    height: 100%; /* Pasti 100% dari .main-chat (100vh) */
+    max-width: 850px; /* Bikin posisinya di tengah persis ChatGPT */
+    margin: 0 auto;
     background-color: transparent !important;
 }
 
-/* PASTIKAN IFRAME DALEMNYA FULL */
+/* PAKSA IFRAME NGELUARIN SCROLLBAR */
 #bp-webchat-container iframe {
     width: 100% !important;
     height: 100% !important;
     border: none !important;
+    /* Botpress akan ngeluarin scroll internalnya sendiri karena tingginya udah mentok */
 }
